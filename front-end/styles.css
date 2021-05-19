@@ -1,6 +1,16 @@
 body {
   font-family: "Montserrat", sans-serif;
 }
+.border-tp {
+  border-top: 1px rgb(152, 153, 153) solid;
+}
+
+.list-n {
+  font-size: 0.8em;
+}
+.item-ft a {
+  color: #212529;
+}
 
 @media (min-width: 992px) {
   .nav-item {
@@ -9,5 +19,17 @@ body {
   }
   .navbar-expand-lg .navbar-collapse {
     justify-content: flex-end !important;
+  }
+
+  .border-tp {
+    border-top: none;
+  }
+
+  .list-n {
+    display: flex;
+    flex-direction: row !important;
+  }
+  .item-ft {
+    padding-left: 40px;
   }
 }
