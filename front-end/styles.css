@@ -1,0 +1,13 @@
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+@media (min-width: 992px) {
+  .nav-item {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .navbar-expand-lg .navbar-collapse {
+    justify-content: flex-end !important;
+  }
+}
