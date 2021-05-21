@@ -8,7 +8,8 @@ body {
 .list-n {
   font-size: 0.8em;
 }
-.item-ft a {
+
+.list-n a {
   color: #212529;
 }
 
