@@ -13,6 +13,27 @@ body {
   color: #212529;
 }
 
+.container-height {
+  height: 75vh;
+}
+
+.color-identity-light {
+  background-color: #a77eff;
+}
+
+.color-identity {
+  background-color: #8f5bfe;
+}
+
+.color-identity:hover {
+  background-color: #7f46fc;
+  color: white;
+}
+
+.txt-color {
+  color: #fff;
+}
+
 @media (min-width: 992px) {
   .nav-item {
     padding-left: 10px;
@@ -29,6 +50,7 @@ body {
   .list-n {
     display: flex;
     flex-direction: row !important;
+    justify-content: center;
   }
   .item-ft {
     padding-left: 40px;
