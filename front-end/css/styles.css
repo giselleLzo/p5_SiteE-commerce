@@ -13,10 +13,6 @@ body {
   color: #212529;
 }
 
-.container-height {
-  height: 75vh;
-}
-
 .color-identity-light {
   background-color: #a77eff;
 }
@@ -32,6 +28,16 @@ body {
 
 .txt-color {
   color: #fff;
+}
+
+@media (min-width: 768px) {
+  .fixed-bt {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+  }
 }
 
 @media (min-width: 992px) {
