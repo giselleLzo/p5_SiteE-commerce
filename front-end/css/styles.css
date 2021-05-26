@@ -38,6 +38,12 @@ body {
     left: 0;
     z-index: 1030;
   }
+
+  .flex-r {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
 }
 
 @media (min-width: 992px) {
@@ -60,5 +66,9 @@ body {
   }
   .item-ft {
     padding-left: 40px;
+  }
+
+  .row-wd {
+    width: 100%;
   }
 }
