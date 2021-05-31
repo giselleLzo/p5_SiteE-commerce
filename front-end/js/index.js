@@ -12,7 +12,7 @@ fetch("http://localhost:3000/api/cameras")
     for(let jsonCamera of jsonListCamera) {
         let camera = new Camera(jsonCamera);
         document.querySelector(".content").innerHTML += `<div class="col-12 col-md-6 pb-3">
-        <div class="card shadow-sm">
+        <a href="produit.html?id=${camera._id}"><div class="card shadow-sm">
           <img
             src="${camera.imageUrl}"
             class="card-img-top img-fluid"
@@ -22,8 +22,9 @@ fetch("http://localhost:3000/api/cameras")
             <p class="card-text">${camera.description}</p>
             <p class="card-text font-weight-bold">${camera.price / 100}.00 €</p>
           </div>
-        </div>
+        </div></a>
       </div>`;
+   
     }
 } );
 
