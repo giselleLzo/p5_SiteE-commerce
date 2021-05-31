@@ -82,29 +82,28 @@
         <div class="row bg-light pt-4 pb-4 mt-3">
           <div class="col-12 col-md-6">
             <div>
-              <img
-                src="http://localhost:3000/images/vcam_1.jpg"
-                alt=""
-                class="img-thumbnail shadow"
-              />
+              <img src="" id="imgCamera" alt="" class="img-thumbnail shadow" />
             </div>
           </div>
           <div class="col-12 col-md-6 pt-4 pt-md-0">
             <div>
-              <h4 class="font-weight-bold">Zurss 50S</h4>
-              <p class="pt-md-0 pt-xl-4">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
+              <h4 id="nameCamera" class="font-weight-bold"></h4>
+              <p id="descriptionCamera" class="pt-md-0 pt-xl-4"></p>
               <p class="pt-md-0">
-                <span class="font-weight-bold">Prix : </span>499.00 €
+                <span class="font-weight-bold">Prix : </span
+                ><span id="priceCamera"></span>
               </p>
             </div>
             <div class="pt-md-0 pt-xl-5">
-              <p class="font-weight-bold">Choisir l'objectif de la caméra :</p>
-              <button type="button" class="btn btn-outline-secondary mt-0">
-                Menu déroulant
-              </button>
+              <form>
+                <p>
+                  <label for="lenses">Choisir l'objectif de la caméra</label>
+                  <select name="lenses">
+                    <option value="35mm 1.4">35mm 1.4</option>
+                    <option value="50mm 1.6">50mm 1.6</option>
+                  </select>
+                </p>
+              </form>
             </div>
             <div class="pt-2 pt-xl-4">
               <button type="button" class="btn txt-color color-identity shadow">
@@ -115,7 +114,7 @@
         </div>
       </div>
       <!-- Footer -->
-      <div class="fixed-bt bg-light">
+      <div class="bg-light">
         <div class="container">
           <div class="row">
             <div class="col">
@@ -132,6 +131,8 @@
       </div>
     </div>
     <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/produit.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
