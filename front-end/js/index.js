@@ -1,4 +1,4 @@
-/** Gère l'affichage des produits dans une forme de liste, page Accueil */
+
 
 class Camera{
     constructor(jsonCamera) {
@@ -6,13 +6,15 @@ class Camera{
     }
 }
 
-fetch("http://localhost:3000/api/cameras")
+/** Gère l'affichage des produits dans une forme de liste, page Accueil */
+
+fetch(apiUrl + "/api/cameras/")
 .then( data => data.json())
 .then( jsonListCamera => {
     for(let jsonCamera of jsonListCamera) {
         let camera = new Camera(jsonCamera);
-        document.querySelector(".content").innerHTML += `<div class="col-12 col-md-6 pb-3">
-        <a href="produit.html?id=${camera._id}"><div class="card shadow-sm">
+        document.querySelector(".content").innerHTML += `<div class="col-12 col-md-6 pb-4">
+        <a href="produit.html?id=${camera._id}"><div class="card shadow-sm scale">
           <img
             src="${camera.imageUrl}"
             class="card-img-top img-fluid"
