@@ -63,6 +63,10 @@ a:hover {
   animation: product 1000ms backwards ease-in-out;
 }
 
+.wrap {
+  flex-direction: column;
+}
+
 @media (min-width: 768px) {
   .fixed-bt {
     position: fixed;
@@ -76,6 +80,10 @@ a:hover {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+  }
+
+  .wrap {
+    flex-direction: row;
   }
 }
 
