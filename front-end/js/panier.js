@@ -93,9 +93,9 @@ for (let l = 0; l < buttonRemove.length; l++) {
     buttonRemove[l].addEventListener("click", (event) => {
         event.preventDefault();
     
-        let idRemoveSelection = addToBasket[l]._id;
+        let idRemoveSelection = addToBasket[l].selectedLense;
            
-        addToBasket = addToBasket.filter( el => el._id !== idRemoveSelection);
+        addToBasket = addToBasket.filter( el => el.selectedLense !== idRemoveSelection);
     
         localStorage.setItem("basket", JSON.stringify(addToBasket));
     
@@ -107,6 +107,23 @@ for (let l = 0; l < buttonRemove.length; l++) {
 
 /**Gère la forme de contact de la page Panier */
 
+let basketItems = JSON.parse(localStorage.getItem("basket"));
+let productsID = [];
+    productsID.push(basketItems);
+
+
+let contact = {
+    firstName: firstName.value,
+    lastName: lastName.value,
+    address: address.value,
+    city: city.value,
+    email: email.value
+  },
+    products = productsID;
+
+let firstName = document.getElementbyId("firstName");
+   
+
 document.querySelector('.form button[type="submit"]').addEventListener("click",function() {
     let valid = true;
     for(let input of document.querySelectorAll(".form input")){
@@ -116,7 +133,21 @@ document.querySelector('.form button[type="submit"]').addEventListener("click",f
         }
     }
         if(valid){
-            alert("Votre message a été envoyé");
+            fetch('http://localhost:3000/api/cameras/order', {
+    method: 'post',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ 
+      contact: contact,
+      products: products
+    })
+  })
+    .then(response => response.json())
+    .then(order => {
+      localStorage.setItem("orderId", order.orderId); 
+      window.location.href = "confirmation.html"; 
+    })
+    .catch(error => alert("Un des champ du formulaire n'est pas correct ou une erreur s'est produite !"));
         }
 });
+
 
