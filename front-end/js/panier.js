@@ -104,3 +104,19 @@ for (let l = 0; l < buttonRemove.length; l++) {
     })
 }
 
+
+/**Gère la forme de contact de la page Panier */
+
+document.querySelector('.form button[type="submit"]').addEventListener("click",function() {
+    let valid = true;
+    for(let input of document.querySelectorAll(".form input")){
+        valid &= input.reportValidity();
+        if(!valid){
+            break;
+        }
+    }
+        if(valid){
+            alert("Votre message a été envoyé");
+        }
+});
+
