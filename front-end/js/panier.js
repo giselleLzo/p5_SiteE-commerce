@@ -67,7 +67,7 @@ for (let k = 0; k < addToBasket.length; k++){
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const totalPriceInBasket = totalPrice.reduce(reducer,0);
-console.log(totalPriceInBasket);
+
 
 productContainer.innerHTML += `
     <div class="col-12">
@@ -107,47 +107,106 @@ for (let l = 0; l < buttonRemove.length; l++) {
 
 /**Gère la forme de contact de la page Panier */
 
-let basketItems = JSON.parse(localStorage.getItem("basket"));
-let productsID = [];
-    productsID.push(basketItems);
+  function checkIfFieldIsValid(input, regExp) {
+    return input.value.match(regExp) !== null;
+  }
 
+  let productsID = [];
 
-let contact = {
-    firstName: firstName.value,
-    lastName: lastName.value,
-    address: address.value,
-    city: city.value,
-    email: email.value
-  },
-    products = productsID;
+  function paymentFormTest(){
 
-let firstName = document.getElementbyId("firstName");
-   
-
-document.querySelector('.form button[type="submit"]').addEventListener("click",function() {
-    let valid = true;
-    for(let input of document.querySelectorAll(".form input")){
-        valid &= input.reportValidity();
-        if(!valid){
-            break;
-        }
+    //Si la fonction a déjà été utilisée on réinitialise le formulaire
+    let inputs = document.querySelectorAll("input");
+    for (let i = 0; i < inputs.length ; i++) {
+      inputs[i].classList.remove("is-invalid"); //suppr is-valid/is-invalid
+      inputs[i].classList.remove("is-valid");
     }
-        if(valid){
-            fetch('http://localhost:3000/api/cameras/order', {
-    method: 'post',
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ 
-      contact: contact,
-      products: products
-    })
-  })
-    .then(response => response.json())
-    .then(order => {
-      localStorage.setItem("orderId", order.orderId); 
-      window.location.href = "confirmation.html"; 
-    })
-    .catch(error => alert("Un des champ du formulaire n'est pas correct ou une erreur s'est produite !"));
+  
+    let alertMessages = document.querySelectorAll(".alertMessages");
+    for (let i = 0; i < alertMessages.length ; i++) {
+      alertMessages[i].remove();
+    };
+  
+    //Récupérer les informations du formulaire
+    var firstName = document.querySelector("#firstName"),
+        lastName = document.querySelector("#lastName"),
+        address = document.querySelector("#address"),
+        city = document.querySelector("#city"),
+        email = document.querySelector("#email");
+
+    //Définition des expressions régulières pour la vérification de la validité des champs
+    let stringRegExp = /([A-Za-z0-9_\s\-'\u00C0-\u024F]+)/;
+        emailRegExp = /^([\w\-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})/i;
+  
+    //Vérification de la validité des champs
+    let isfirstNameValid = checkIfFieldIsValid(firstName, stringRegExp);
+        isLastNameValid = checkIfFieldIsValid(lastName, stringRegExp);
+        isAddressValid = checkIfFieldIsValid(address, stringRegExp);
+        isCityValid = checkIfFieldIsValid(city, stringRegExp);
+        isEmailValid = checkIfFieldIsValid(email, emailRegExp);
+  
+    //Alerter l'utilisateur s'il a mal rempli le formulaire
+    let fields = [firstName, lastName, address, city, email],
+        fieldsValidity = [isfirstNameValid, isLastNameValid, isAddressValid, isCityValid, isEmailValid],
+        isAFieldInvalid = false;
+  
+    for (let i = 0; i < fields.length; i++) {
+      if (!fieldsValidity[i]) { //si un champ n'est pas valide
+        isAFieldInvalid = true; //un champ au moins est incorrect, sera utilisé plus loin pour empêcher la requête POST à l'API
+  
+        //Création du message à envoyer à l'utilisateur
+        let message;
+        if (fields[i] === document.querySelector("#firstName")) {
+          message = "Le prénom est incorrect !";
+        } else if (fields[i] === document.querySelector("#lastName")) {
+          message = "Le nom est incorrect !";
+        } else if (fields[i] === document.querySelector("#address")) {
+          message = "L'adresse postale est incorrecte !";
+        } else if (fields[i] === document.querySelector("#city")) {
+          message = "La ville est incorrecte !";
+        } else if (fields[i] === document.querySelector("#email")) {
+          message = "L'adresse mail est incorrecte !";
         }
-});
+  
+        //Création et stylisation de l'alerte
+        let alert = document.createElement("div");
+        alert.appendChild(document.createTextNode(message));
+        fields[i].classList.add("is-invalid");
+        alert.classList.add("alertMessages", "invalid-feedback");
+        fields[i].parentElement.appendChild(alert);
+  
+      } else {
+        fields[i].classList.add("is-valid");
+      }
+    }
+    //Si l'un des champs a été vidé ...
+    if (isAFieldInvalid) return; //la fonction s'arrête 
+    //sinon on continue
 
+      let contact = {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        address: address.value,
+        city: city.value,
+        email: email.value
+      },
+        products = productsID;
+      //Récupérer l'orderId
+      fetch('http://localhost:3000/api/cameras/order', {
+        method: 'post',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ //On convertit les données au format JSON
+          contact: contact,
+          products: products
+        })
+      })
+        .then(response => response.json())
+        .then(order => {
+          localStorage.setItem("orderId", order.orderId); //On definit orderID
+          window.location.href = "confirmation.html"; // On redirige
+        })
+        .catch(error => alert("Un des champ du formulaire n'est pas correct !"));
+    }
 
+  
+  document.querySelector("#submitPayment").addEventListener("click", paymentFormTest, true);
