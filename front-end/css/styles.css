@@ -67,6 +67,15 @@ a:hover {
   flex-direction: column;
 }
 
+.aColor {
+  color: #6c757d !important;
+}
+
+.aColor:hover {
+  color: #7f46fc !important;
+  text-decoration: underline;
+}
+
 @media (min-width: 768px) {
   .fixed-bt {
     position: fixed;
