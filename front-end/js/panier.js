@@ -68,6 +68,7 @@ for (let k = 0; k < addToBasket.length; k++){
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const totalPriceInBasket = totalPrice.reduce(reducer,0);
 
+localStorage.setItem('totalPriceInBasket', totalPrice.reduce(reducer,0));
 
 productContainer.innerHTML += `
     <div class="col-12">
@@ -84,7 +85,7 @@ productContainer.innerHTML += `
         </div>
     </div>`;
 
-
+ 
 /** Suprime les produits du panier */
 
 let buttonRemove = document.querySelectorAll(".btnRemove");
