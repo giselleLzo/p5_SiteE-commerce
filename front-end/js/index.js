@@ -7,12 +7,11 @@ class Camera{
 
 /** Gère l'affichage et les interactions de la page Accueil */
 
-fetch(apiUrl + "/api/cameras/") // Appelle l'api de produits
+fetch(apiUrl + "/api/cameras/") //Appelle l'api de produits
 .then( data => data.json())
 .then( jsonListCamera => {
     for(let jsonCamera of jsonListCamera) {
-        let camera = new Camera(jsonCamera);
-        // Création de la liste des éléments 
+        let camera = new Camera(jsonCamera); //Création de la liste des éléments 
         document.querySelector(".content").innerHTML += `
           <div class="col-12 col-md-6 pb-4"> 
             <a href="produit.html?id=${camera._id}">

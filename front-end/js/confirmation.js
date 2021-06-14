@@ -1,19 +1,14 @@
-// Recupere l'Id de la commande
+/** Gère les interactions de la page Confirmation */
 
-let orderId = localStorage.getItem('orderId');
+let orderId = localStorage.getItem('orderId'); //Recupère l'Id de la commande
 
-//Recupere le prix total de la commande
+let totalPriceInBasket = localStorage.getItem('totalPriceInBasket'); //Recupère le prix total de la commande
 
-let totalPriceInBasket = localStorage.getItem('totalPriceInBasket');
-
-//Recupere les informations de la commande
-
-const orderNumber = document.getElementById('orderNumber');
+//Recupère les informations de la commande
+const orderNumber = document.getElementById('orderNumber'); 
 orderNumber.textContent = "Numéro de commande : " + orderId;
 
 const totalOrder = document.getElementById('totalOrder');
 totalOrder.textContent = "Montant total de votre commande : " + totalPriceInBasket / 100 + ".00 €";
 
-localStorage.clear();
-
-
+localStorage.clear(); //Efface le localStorage
