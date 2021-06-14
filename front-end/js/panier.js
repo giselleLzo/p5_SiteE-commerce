@@ -1,12 +1,13 @@
 /** Gère les interactions de la page Panier */
 
-// Création d'une variable pour manipuler le panier
+//Création d'une variable pour manipuler le panier
 let addToBasket = JSON.parse(localStorage.getItem("basket"));
 
 const productContainer = document.querySelector("#itemsInBasket");
 
 let displayBasket = [];
 
+//Montre un message si le panier est vide
 if(addToBasket === null || addToBasket == 0 ) {
     const emptyBasket = `
         <div class="col-12">
@@ -18,7 +19,7 @@ if(addToBasket === null || addToBasket == 0 ) {
         </div>`;
 
     productContainer.innerHTML = emptyBasket;
-}else {
+}else { //Récupération des éléments dans le panier, s'il y en a
     for (j = 0; j < addToBasket.length; j++) {
         displayBasket = displayBasket + `
             <div class="col-12 border-bottom border-secondary">
@@ -49,27 +50,29 @@ if(addToBasket === null || addToBasket == 0 ) {
             </div>`;
         }
 
+        //Montre les élémentss dans le panier
         if(j == addToBasket.length) {
             productContainer.innerHTML = displayBasket;   
         }
     }
 
 
-/**Calcule le montant total du panier */
+// Calcule le montant total du panier
 
 let totalPrice = [];
 
-for (let k = 0; k < addToBasket.length; k++){
+for (let k = 0; k < addToBasket.length; k++){ //Cherche les prix dans le panier
     let priceProductsInBasket = addToBasket[k].price;
 
-    totalPrice.push(priceProductsInBasket)
+    totalPrice.push(priceProductsInBasket); //Mets les prix du panier
 }
 
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
+const reducer = (accumulator, currentValue) => accumulator + currentValue; //Additionne les prix avec la méthode reduce
 const totalPriceInBasket = totalPrice.reduce(reducer,0);
 
 localStorage.setItem('totalPriceInBasket', totalPrice.reduce(reducer,0));
 
+//Affiche le prix total du panier
 productContainer.innerHTML += `
     <div class="col-12">
         <div class="row">
@@ -86,21 +89,21 @@ productContainer.innerHTML += `
     </div>`;
 
  
-/** Suprime les produits du panier */
+// Suprime les produits du panier
 
 let buttonRemove = document.querySelectorAll(".btnRemove");
 
-for (let l = 0; l < buttonRemove.length; l++) {
+for (let l = 0; l < buttonRemove.length; l++) { //Ecouter les clics sur le bouton btnRemove
     buttonRemove[l].addEventListener("click", (event) => {
         event.preventDefault();
     
-        let idRemoveSelection = addToBasket[l].selectedLense;
+        let idRemoveSelection = addToBasket[l].selectedLense; //Viser le type de lentille pour la suppression du produit
            
         addToBasket = addToBasket.filter( el => el.selectedLense !== idRemoveSelection);
     
-        localStorage.setItem("basket", JSON.stringify(addToBasket));
+        localStorage.setItem("basket", JSON.stringify(addToBasket)); //Envoyer la variable dans le localStorage en format Json
     
-        alert("Le produit a été supprimé");
+        alert("Le produit a été supprimé"); //Alert de la suppression du produit et rechargement de la page
         window.location.href = "panier.html";
     })
 }
@@ -119,7 +122,7 @@ for (let l = 0; l < buttonRemove.length; l++) {
     //Si la fonction a déjà été utilisée on réinitialise le formulaire
     let inputs = document.querySelectorAll("input");
     for (let i = 0; i < inputs.length ; i++) {
-      inputs[i].classList.remove("is-invalid"); //suppr is-valid/is-invalid
+      inputs[i].classList.remove("is-invalid"); //supprime is-valid/is-invalid
       inputs[i].classList.remove("is-valid");
     }
   
@@ -153,7 +156,7 @@ for (let l = 0; l < buttonRemove.length; l++) {
   
     for (let i = 0; i < fields.length; i++) {
       if (!fieldsValidity[i]) { //si un champ n'est pas valide
-        isAFieldInvalid = true; //un champ au moins est incorrect, sera utilisé plus loin pour empêcher la requête POST à l'API
+        isAFieldInvalid = true; //un champ au moins est incorrect, empêche la requête POST
   
         //Création du message à envoyer à l'utilisateur
         let message;
@@ -169,7 +172,7 @@ for (let l = 0; l < buttonRemove.length; l++) {
           message = "L'adresse mail est incorrecte !";
         }
   
-        //Création et stylisation de l'alerte
+        //Création de l'alerte
         let alert = document.createElement("div");
         alert.appendChild(document.createTextNode(message));
         fields[i].classList.add("is-invalid");
@@ -180,7 +183,7 @@ for (let l = 0; l < buttonRemove.length; l++) {
         fields[i].classList.add("is-valid");
       }
     }
-    //Si l'un des champs a été vidé ...
+    //Si l'un des champs a été vidé
     if (isAFieldInvalid) return; //la fonction s'arrête 
     //sinon on continue
 
@@ -206,7 +209,7 @@ for (let l = 0; l < buttonRemove.length; l++) {
           localStorage.setItem("orderId", order.orderId); //On definit orderID
           window.location.href = "confirmation.html"; // On redirige
         })
-        .catch(error => alert("Un des champ du formulaire n'est pas correct !"));
+        .catch(error);
     }
 
   
