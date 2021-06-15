@@ -7,7 +7,7 @@ class Camera{
 
 /** Gère l'affichage et les interactions de la page Accueil */
 
-fetch(apiUrl + "/api/cameras/") //Appelle l'api de produits
+fetch("http://localhost:3000/api/cameras/") //Appelle l'api de produits
 .then( data => data.json())
 .then( jsonListCamera => {
     for(let jsonCamera of jsonListCamera) {

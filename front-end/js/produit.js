@@ -21,7 +21,7 @@ function productPage(product) {
 
 //Appelle l'api de produits
 function getCamera(id) {
-    fetch(apiUrl + "/api/cameras/" + id)
+    fetch("http://localhost:3000/api/cameras/" + id)
       .then(response => response.json())
       .then(product => {
         productPage(product);
