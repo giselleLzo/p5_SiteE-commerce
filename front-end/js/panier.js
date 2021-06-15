@@ -61,7 +61,7 @@ if(addToBasket === null || addToBasket == 0 ) {
 
 let totalPrice = [];
 
-for (let k = 0; k < addToBasket.length; k++){ //Cherche les prix dans le panier
+for (let k in addToBasket){ //Cherche les prix dans le panier
     let priceProductsInBasket = addToBasket[k].price;
 
     totalPrice.push(priceProductsInBasket); //Mets les prix du panier
@@ -209,7 +209,8 @@ for (let l = 0; l < buttonRemove.length; l++) { //Ecouter les clics sur le bouto
           localStorage.setItem("orderId", order.orderId); //On definit orderID
           window.location.href = "confirmation.html"; // On redirige
         })
-        .catch(error);
+        .catch(function(err) {
+        });
     }
 
   
