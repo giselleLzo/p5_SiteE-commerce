@@ -209,7 +209,7 @@ for (let l = 0; l < buttonRemove.length; l++) { //Ecouter les clics sur le bouto
           localStorage.setItem("orderId", order.orderId); //On definit orderID
           window.location.href = "confirmation.html"; // On redirige
         })
-        .catch(function(err) {
+        .catch(function(_err) {
         });
     }
 
