@@ -130,6 +130,10 @@ for (let l = 0; l < buttonRemove.length; l++) { //Ecouter les clics sur le bouto
     for (let i = 0; i < alertMessages.length ; i++) {
       alertMessages[i].remove();
     };
+
+    if(basket == null || basket == 0) {
+      
+    }
   
     //Récupérer les informations du formulaire
     var firstName = document.querySelector("#firstName"),
