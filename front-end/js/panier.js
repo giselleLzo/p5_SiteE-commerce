@@ -119,6 +119,9 @@ for (let l = 0; l < buttonRemove.length; l++) { //Ecouter les clics sur le bouto
 
   function paymentFormTest(){
 
+    if(addToBasket === null || addToBasket == 0 ) {
+      alert("Votre panier est vide ! Ajoutez un produit avant de procéder au paiement.");
+  }else {
     //Si la fonction a déjà été utilisée on réinitialise le formulaire
     let inputs = document.querySelectorAll("input");
     for (let i = 0; i < inputs.length ; i++) {
@@ -131,10 +134,6 @@ for (let l = 0; l < buttonRemove.length; l++) { //Ecouter les clics sur le bouto
       alertMessages[i].remove();
     };
 
-    if(basket == null || basket == 0) {
-      
-    }
-  
     //Récupérer les informations du formulaire
     var firstName = document.querySelector("#firstName"),
         lastName = document.querySelector("#lastName"),
@@ -215,7 +214,7 @@ for (let l = 0; l < buttonRemove.length; l++) { //Ecouter les clics sur le bouto
         })
         .catch(function(_err) {
         });
-    }
-
+  }
+}
   
   document.querySelector("#submitPayment").addEventListener("click", paymentFormTest, true);
